@@ -115,7 +115,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     _buildStatItem(
                       icon: Icons.access_time,
                       label: 'Última',
-                      value: _lastNotificationTime! != null ? _formatTime() : '--:--',
+                      value: _lastNotificationTime != null ? _formatTime() : '--:--',
                       color: Colors.orange,
                     ),
                   ],
