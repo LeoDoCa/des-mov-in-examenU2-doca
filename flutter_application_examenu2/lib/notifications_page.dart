@@ -13,10 +13,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
   String _lastBody = '';
   int _notificationCount = 0;
   DateTime? _lastNotificationTime;
+  String? _deviceToken;
 
   @override
   void initState() {
     super.initState();
+    _getToken();
     
     // Escuchar notificaciones en primer plano
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -34,7 +36,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           SnackBar(
             content: Text('Notificación: ${notification.title ?? 'Sin título'}'),
             duration: const Duration(seconds: 3),
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Colors.teal,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -45,9 +47,20 @@ class _NotificationsPageState extends State<NotificationsPage> {
     });
   }
 
+  Future<void> _getToken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    setState(() {
+      _deviceToken = token;
+    });
+    print('=== TOKEN DEL DISPOSITIVO ===');
+    print(token);
+    print('=============================');
+  }
+
   String _formatTime() {
     if (_lastNotificationTime == null) return '';
-    final time = _lastNotificationTime!;
+    // Convertir a hora local (México)
+    final time = _lastNotificationTime!.toLocal();
     return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}';
   }
 
@@ -88,7 +101,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                       icon: Icons.notifications_active,
                       label: 'Total',
                       value: _notificationCount.toString(),
-                      color: Colors.deepPurple,
+                      color: Colors.teal[400]!,
                     ),
                     Container(
                       width: 1,
@@ -136,7 +149,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   gradient: LinearGradient(
-                    colors: [Colors.deepPurple.shade50, Colors.white],
+                    colors: [Colors.teal[400]!, Colors.teal[200]!],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -150,7 +163,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.teal,
+                            color: Colors.teal[600],
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Icon(
@@ -200,6 +213,66 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
             
             const SizedBox(height: 30),
+            
+            // Tarjeta de TOKEN (para pruebas)
+            if (_deviceToken != null) ...[
+              Card(
+                elevation: 2,
+                color: Colors.green.shade50,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.key, color: Colors.green.shade700),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Token del dispositivo',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green.shade900,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: SelectableText(
+                          _deviceToken!,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[800],
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Copia este token para enviarte notificaciones específicas',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
             
             // Tarjeta de instrucciones
             Card(

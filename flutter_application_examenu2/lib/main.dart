@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'notifications_page.dart';
 
 // Handler para notificaciones en segundo plano
+@pragma('vm:entry-point')
 Future<void> _firebaseBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Notificación en segundo plano: ${message.messageId}');
