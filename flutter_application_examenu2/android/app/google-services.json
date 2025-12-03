@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "590610330563",
+    "project_id": "test-login-e0c6c",
+    "storage_bucket": "test-login-e0c6c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590610330563:android:aff17b2aecb8c49e71c376",
+        "android_client_info": {
+          "package_name": "com.example.actividad_notificaciones"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiM26u1vX6vHzp1E6Qv6o_YvIAJT27k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590610330563:android:d006c376bb342b1f71c376",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_examenu2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiM26u1vX6vHzp1E6Qv6o_YvIAJT27k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590610330563:android:0e180a98d230a4c271c376",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_push"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiM26u1vX6vHzp1E6Qv6o_YvIAJT27k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590610330563:android:a602c451d4d43e6371c376",
+        "android_client_info": {
+          "package_name": "com.example.login_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiM26u1vX6vHzp1E6Qv6o_YvIAJT27k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
