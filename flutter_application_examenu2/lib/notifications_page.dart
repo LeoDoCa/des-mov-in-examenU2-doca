@@ -59,9 +59,13 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   String _formatTime() {
     if (_lastNotificationTime == null) return '';
-    // Convertir a hora local (México)
-    final time = _lastNotificationTime!.toLocal();
-    return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}';
+
+    // Forzar hora de Mexico (UTC-6)
+    final local = _lastNotificationTime!.toUtc().add(const Duration(hours: -6));
+
+    return '${local.hour.toString().padLeft(2, '0')}:'
+          '${local.minute.toString().padLeft(2, '0')}:'
+          '${local.second.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -111,7 +115,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     _buildStatItem(
                       icon: Icons.access_time,
                       label: 'Última',
-                      value: _lastNotificationTime != null ? _formatTime() : '--:--',
+                      value: _lastNotificationTime! != null ? _formatTime() : '--:--',
                       color: Colors.orange,
                     ),
                   ],
